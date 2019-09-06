@@ -16,7 +16,8 @@
     "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc",
+    "build-dev": "tsc",
+    "build": "tsc --sourceMap false",
     "prestart": "npm run build"
   },
   "keywords": [],
