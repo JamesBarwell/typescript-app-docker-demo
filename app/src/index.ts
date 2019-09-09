@@ -1,17 +1,18 @@
-import express from "express";
-import { yo } from "./helper/yo";
+import App from "./app";
+import ApiSource from "./source/api";
 
-const app = express();
-const port = 8080; // default port to listen
+import Log from "./log";
+const log = Log();
 
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    const greeting = yo("Dave");
-    res.send(greeting);
-} );
+const apiSource = ApiSource(
+    log
+);
+const app = App(
+    log,
+    apiSource,
+);
 
-// start the Express server
-app.listen( port, () => {
-    // tslint:disable-next-line:no-console
-    console.log( `server started at http://localhost:${ port }` );
-} );
+const httpPort = 8080;
+app.listen(httpPort, () => {
+    log.info("http.listen", { port: httpPort });
+});
