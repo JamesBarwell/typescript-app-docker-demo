@@ -23,7 +23,7 @@
     "start": "node .",
     "start-dev": "nodemon --exec ts-node -- ./src/index.ts",
     "test": "mocha",
-    "test-watch": "mocha- w",
+    "test-watch": "mocha -w",
     "coverage": "nyc npm test",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build-dev": "tsc",
