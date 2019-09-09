@@ -1,10 +1,13 @@
-const assert = require('assert');
-const sinon = require('sinon');
-const request = require('supertest');
+import assert from 'assert';
+import sinon from 'sinon';
+import request from 'supertest';
 
-const App = require('../src/app');
+import Log from "../src/log";
+import App from '../src/app';
 
-function startApp(opts = {}) {
+function startApp(opts: any = {}) {
+    const log = Log();
+
     const apiSource = opts.apiSource || {
         fetchIpAddress: sinon.stub().resolves({
             ip: '123.123.123.123',
@@ -13,6 +16,7 @@ function startApp(opts = {}) {
     };
 
     const app = App(
+        log,
         apiSource,
     );
 
@@ -25,9 +29,9 @@ function startApp(opts = {}) {
 describe('App', () => {
     context('when API is healthy', () => {
         describe('GET /', () => {
-            let response;
-            let app;
-            let apiSource;
+            let response: any;
+            let app: any;
+            let apiSource: any;
 
             beforeEach(async () => {
                 ({ app, apiSource } = startApp());
@@ -50,7 +54,7 @@ describe('App', () => {
 
     context('when API is down', () => {
         describe('GET /', () => {
-            let response;
+            let response: any;
             let app;
 
             beforeEach(async () => {

@@ -15,7 +15,7 @@ export default (
     app.get("/", ipController.ipAction);
 
     app.use((err: any, req: any, res: any, next: any) => {
-        log.info("app.error", err.toString());
+        log.info("app.error", { err: err.toString() });
 
         if (res.headersSent) {
             return next(err);
