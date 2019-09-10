@@ -26,7 +26,7 @@
     "start": "node .",
     "start-dev": "nodemon --exec ts-node -- ./src/index.ts",
     "test": "mocha --require ts-node/register --exit 'test/**/*.ts'",
-    "test-watch": "mocha -w",
+    "test-watch": "mocha --require ts-node/register --watch-extensions ts -w 'test/**/*.ts'",
     "coverage": "nyc npm test",
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build-dev": "tsc",
