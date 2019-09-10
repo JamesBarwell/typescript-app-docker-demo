@@ -1,4 +1,5 @@
 import express from "express";
+import { NextFunction, Request, Response } from "express";
 
 import IpController from "./controller/ip";
 import ApiRepo from "./repository/api";
@@ -14,7 +15,7 @@ export default (
 
     app.get("/", ipController.ipAction);
 
-    app.use((err: any, req: any, res: any, next: any) => {
+    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
         log.info("app.error", { err: err.toString() });
 
         if (res.headersSent) {

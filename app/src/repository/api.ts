@@ -1,5 +1,5 @@
 export default (apiSource: any) => {
-    async function getIpAddress() {
+    async function getIpAddress(): Promise<string> {
         const data = await apiSource.fetchIpAddress();
         return data.ip;
     }

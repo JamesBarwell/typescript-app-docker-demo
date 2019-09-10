@@ -1,6 +1,6 @@
 import http from "http";
 
-function httpGetJson(uri: any) {
+function httpGetJson(uri: string): Promise<string> {
     return new Promise((resolve, reject) => {
         http.get(uri, {
             headers: {
@@ -20,10 +20,10 @@ function httpGetJson(uri: any) {
 }
 
 export default (log: any) => {
-    async function fetchIpAddress(): Promise<any> {
+    async function fetchIpAddress(): Promise<string> {
         log.info("source.api.fetchIpAddress.start");
 
-        let result: any;
+        let result: string;
         try {
             result = await httpGetJson("http://ifconfig.co");
         } catch (err) {
@@ -31,7 +31,7 @@ export default (log: any) => {
             throw err;
         }
 
-        let jsonResult: any;
+        let jsonResult: string;
         try {
             jsonResult = JSON.parse(result);
         } catch (err) {
