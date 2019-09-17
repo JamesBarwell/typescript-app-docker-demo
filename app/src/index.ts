@@ -1,8 +1,8 @@
 import App from "./app";
 import ApiSource from "./source/api";
 
-import Log from "./log";
-const log = Log();
+import { Log } from "./log";
+const log = new Log();
 
 const apiSource = ApiSource(
     log

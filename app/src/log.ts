@@ -1,44 +1,31 @@
-export default () => {
-    function padStart(value: any, length: any, character: any) {
-        return `${value}`.padStart(length, character);
+/* tslint:disable:object-literal-sort-keys */
+export class Log {
+
+    public info(key: string, data?: {}): void {
+        this.output("info", key, data);
     }
 
-    function getTimestamp() {
-        const date = new Date();
-        return `${[
-            date.getUTCFullYear(),
-            padStart(date.getUTCMonth() + 1, 2, "0"),
-            padStart(date.getUTCDate(), 2, "0"),
-        ].join("-")} ${[
-            padStart(date.getUTCHours(), 2, "0"),
-            padStart(date.getUTCMinutes(), 2, "0"),
-            padStart(date.getUTCSeconds(), 2, "0"),
-        ].join(":")}.${
-            padStart(date.getUTCMilliseconds(), 3, "0")}`;
+    public warn(key: string, data?: {}): void {
+        this.output("warn", key, data);
     }
 
-    function makeLogger(level: any) {
-        return (key: any, data?: any) => {
-            if (!/^[a-zA-Z0-9.-]+$/.test(key)) {
-                throw new Error(
-                    `Invalid log key, must be alphanumeric with dots and dashes: ${key}`
-                );
-            }
-
-            const logline = JSON.stringify({
-                key,
-                level,
-                time: getTimestamp(),
-                ...data,
-            });
-
-            process.stdout.write(`${logline}\n`);
-        };
+    public error(key: string, data?: {}): void {
+        this.output("error", key, data);
     }
+    private output(level: string, key: string, data?: {}): void {
+        if (!/^[a-zA-Z0-9.-]+$/.test(key)) {
+            throw new Error(
+                `Invalid log key, must be alphanumeric with dots and dashes: ${key}`
+            );
+        }
 
-    return {
-        error: makeLogger("error"),
-        info: makeLogger("info"),
-        warn: makeLogger("warn"),
-    };
-};
+        const logline = JSON.stringify({
+            time: (new Date()).toISOString(),
+            level,
+            key,
+            ...data,
+        });
+
+        process.stdout.write(`${logline}\n`);
+    }
+}

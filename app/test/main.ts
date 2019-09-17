@@ -2,11 +2,11 @@ import assert from 'assert';
 import sinon from 'sinon';
 import request from 'supertest';
 
-import Log from "../src/log";
+import { Log } from "../src/log";
 import App from '../src/app';
 
 function startApp(opts: any = {}) {
-    const log = Log();
+    const log = new Log();
 
     const apiSource = opts.apiSource || {
         fetchIpAddress: sinon.stub().resolves({
@@ -58,16 +58,16 @@ describe('App', () => {
             let app;
 
             beforeEach(async () => {
-                const apiSourceFailure = {
+                const apiSource = {
                     fetchIpAddress: sinon.stub().rejects(new Error('500')),
                 };
                 ({ app } = startApp({
-                    apiSource: apiSourceFailure,
+                    apiSource: apiSource,
                 }));
                 response = await request(app).get('/');
             });
 
-            it('should respond 200', () => (
+            it('should respond 500', () => (
                 assert.equal(response.statusCode, 500)
             ));
         });

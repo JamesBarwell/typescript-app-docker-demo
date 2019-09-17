@@ -2,10 +2,11 @@ import express from "express";
 import { NextFunction, Request, Response } from "express";
 
 import IpController from "./controller/ip";
+import { Log } from "./log";
 import ApiRepo from "./repository/api";
 
 export default (
-    log: any,
+    log: Log,
     apiSource: any,
 ) => {
     const apiRepo = ApiRepo(apiSource);

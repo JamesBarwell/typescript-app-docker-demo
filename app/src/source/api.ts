@@ -1,5 +1,7 @@
 import http from "http";
 
+import { Log } from "../log";
+
 function httpGetJson(uri: string): Promise<string> {
     return new Promise((resolve, reject) => {
         http.get(uri, {
@@ -19,7 +21,7 @@ function httpGetJson(uri: string): Promise<string> {
     });
 }
 
-export default (log: any) => {
+export default (log: Log) => {
     async function fetchIpAddress(): Promise<string> {
         log.info("source.api.fetchIpAddress.start");
 
