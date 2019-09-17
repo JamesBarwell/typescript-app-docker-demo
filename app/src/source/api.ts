@@ -27,7 +27,7 @@ export default (log: any) => {
         try {
             result = await httpGetJson("http://ifconfig.co");
         } catch (err) {
-            log.warn("Error making HTTP request:", err);
+            log.warn("api.source", { message: `Error making HTTP request: ${err.toString()}`});
             throw err;
         }
 
@@ -35,7 +35,7 @@ export default (log: any) => {
         try {
             jsonResult = JSON.parse(result);
         } catch (err) {
-            log.warn("Error parsing JSON:", err);
+            log.warn("api.source", { message: `Error parsing JSON: ${err.toString()}`});
             throw err;
         }
 
