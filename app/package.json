@@ -13,13 +13,15 @@
     "@types/node": "^12.7.4",
     "@types/sinon": "^7.0.13",
     "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.3.1",
+    "@typescript-eslint/parser": "^2.3.1",
+    "eslint": "^6.5.0",
     "mocha": "^5.0.0",
     "nodemon": "^1.19.2",
     "nyc": "^14.1.1",
     "sinon": "^4.2.2",
     "supertest": "^3.0.0",
     "ts-node": "^8.3.0",
-    "tslint": "^5.19.0",
     "typescript": "^3.6.2"
   },
   "scripts": {
@@ -28,7 +30,7 @@
     "test": "mocha --require ts-node/register --exit 'test/**/*.ts'",
     "test-watch": "mocha --require ts-node/register --watch-extensions ts -w 'test/**/*.ts'",
     "coverage": "nyc npm test",
-    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "prebuild": "eslint './src/**/*.ts'",
     "build-dev": "tsc",
     "build": "tsc --sourceMap false",
     "prestart": "npm run build"
