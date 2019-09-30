@@ -1,16 +1,5 @@
-import App from "./app";
-import ApiSource from "./source/api";
-
-import { Log } from "./log";
-const log = new Log();
-
-const apiSource = ApiSource(
-    log
-);
-const app = App(
-    log,
-    apiSource,
-);
+import { app } from "./app";
+import { log } from "./log";
 
 const httpPort = 8080;
 app.listen(httpPort, () => {

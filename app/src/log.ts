@@ -1,5 +1,5 @@
 /* tslint:disable:object-literal-sort-keys */
-export class Log {
+class Log {
 
     public info(key: string, data?: {}): void {
         this.output("info", key, data);
@@ -29,3 +29,6 @@ export class Log {
         process.stdout.write(`${logline}\n`);
     }
 }
+
+const log = new Log();
+export { log };

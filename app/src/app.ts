@@ -1,32 +1,22 @@
 import express from "express";
-import { NextFunction, Request, Response } from "express";
+import { Errback, Request, Response, NextFunction } from "express";
+import { log } from "./log";
 
-import IpController from "./controller/ip";
-import { Log } from "./log";
-import ApiRepo from "./repository/api";
-import { ApiSource } from "./source/api";
+import * as ipController from "./controller/ip";
 
-export default (
-    log: Log,
-    apiSource: ApiSource,
-) => {
-    const apiRepo = ApiRepo(apiSource);
-    const ipController = IpController(apiRepo);
+const app = express();
 
-    const app = express();
+app.get("/", ipController.ipAction);
 
-    app.get("/", ipController.ipAction);
+app.use((err: Errback, req: Request, res: Response, next: NextFunction) => {
+    log.error("app", { err: err.toString() });
 
-    app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-        log.error("app", { err: err.toString() });
+    if (res.headersSent) {
+        return next(err);
+    }
 
-        if (res.headersSent) {
-            return next(err);
-        }
+    res.status(500);
+    return res.send("internal server error");
+});
 
-        res.status(500);
-        return res.send("internal server error");
-    });
-
-    return app;
-};
+export { app };

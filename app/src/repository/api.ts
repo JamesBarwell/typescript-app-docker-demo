@@ -1,10 +1,8 @@
-export default (apiSource: any) => {
-    async function getIpAddress(): Promise<string> {
-        const data = await apiSource.fetchIpAddress();
-        return data.ip;
-    }
+import { fetchIpAddress } from "../source/api";
 
-    return {
-        getIpAddress,
-    };
+async function getIpAddress(): Promise<string> {
+    const data = await fetchIpAddress();
+    return data.ip;
 };
+
+export { getIpAddress };
