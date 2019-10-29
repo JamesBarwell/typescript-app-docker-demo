@@ -1,4 +1,4 @@
-FROM node:12.9.0-alpine AS build
+FROM node:12.13.0-alpine AS build
 
 ENV NODE_ENV production
 
@@ -8,7 +8,7 @@ RUN npm install --ignore-scripts && \
     npm run build
 
 
-FROM node:12.9.0-alpine
+FROM node:12.13.0-alpine
 
 ENV NODE_ENV production
 

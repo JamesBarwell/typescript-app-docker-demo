@@ -1,4 +1,4 @@
-NODE_BASE_IMAGE := node:12.9.0-alpine
+NODE_BASE_IMAGE := node:12.13.0-alpine
 NODE_BASE_INSTALL_DIR := /home/node/app
 IMAGE_NAME := nodeappsampletsc
 
