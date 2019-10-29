@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import { getIpAddress } from "../repository/api";
+import { fetchIpAddress } from "../source/api";
 
 async function ipAction(
     req: Request, res: Response, next: NextFunction
 ): Promise<void> {
     try {
-        const result = await getIpAddress();
+        const result = await fetchIpAddress();
         res.setHeader("Content-Type", "plain/text");
-        res.send(`My IP is: ${result}`);
+        res.send(`My IP is: ${result.ip}`);
     } catch (err) {
         next(err);
     }
