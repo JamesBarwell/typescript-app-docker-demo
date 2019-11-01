@@ -5,6 +5,8 @@ IMAGE_NAME := nodeappsampletsc
 build:
 	docker build -t ${IMAGE_NAME} .
 
+test-and-build: lint test audit build
+
 run-prod:
 	docker run --rm --init -p 8080:8080 -e NODE_ENV=production ${IMAGE_NAME}
 
